@@ -4,14 +4,7 @@
   "private": true,
   "description": "A lambda function that takes a screenshot of a URL and uploads it to Cloudinary",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rubenvar/screen-to-cloudinary.git"
-  },
-  "bugs": {
-    "url": "https://github.com/rubenvar/screen-to-cloudinary/issues"
-  },
-  "homepage": "https://github.com/rubenvar/screen-to-cloudinary#readme"
+    "build-lambda-package": "npm run prepare-lambda-package && cd lambda-dist && zip -rq ../lambda-package.zip .",
+    "prepare-lambda-package": "rm -rf lambda-dist && mkdir lambda-dist && cp lambda/package.json lambda-dist/package.json && cp lambda/screenshot.js lambda-dist/screenshot.js && cp lambda/index.js lambda-dist/index.js && cd lambda-dist && npm install --production"
+  }
 }
