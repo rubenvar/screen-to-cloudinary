@@ -1,5 +1,8 @@
 .DS_Store
 .env
 node_modules/
+
 lambda-dist/
 lambda-package.zip
+
+screenshots/
