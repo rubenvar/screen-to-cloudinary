@@ -1,0 +1,17 @@
+{
+  "name": "screen-to-cloudinary",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A lambda function that takes a screenshot of a URL and uploads it to Cloudinary",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubenvar/screen-to-cloudinary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rubenvar/screen-to-cloudinary/issues"
+  },
+  "homepage": "https://github.com/rubenvar/screen-to-cloudinary#readme"
+}
