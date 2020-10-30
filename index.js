@@ -1,9 +1,7 @@
 require('dotenv').config();
-const { proxyResponse, proxyError } = require('./proxy');
-const {
-  screenshotToLocal,
-  screenshotToCloudinary,
-} = require('./takeScreenshot');
+const { proxyResponse, proxyError } = require('./utils/proxy');
+const screenshotToLocal = require('./utils/screenshotToLocal');
+const screenshotToCloudinary = require('./utils/screenshotToCloudinary');
 
 exports.handler = async (event, context) => {
   let takeScreenshot;
@@ -16,7 +14,9 @@ exports.handler = async (event, context) => {
 
   const config = {
     cloudinaryFolder: request.cloudinaryFolder || 'default',
-    fileName: `${request.fileName || `default-${Date.now()}`}.jpg`,
+    fileName: `${request.fileName || `default-${Date.now()}`}${
+      process.env.CLOUDINARY_URL ? '' : '.jpg'
+    }`,
     url: request.url,
     width: request.width || 1024,
     height: request.height || 768,
