@@ -27,3 +27,9 @@ const start = async () => {
 };
 
 start();
+
+// {
+//   "url": "https://hide.me/es/",
+//   "cloudinaryFolder": "vpnf/screenshots",
+//   "fileName": "F009"
+// }
