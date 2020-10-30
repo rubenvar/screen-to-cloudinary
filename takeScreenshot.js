@@ -93,35 +93,33 @@ async function screenshotToLocal(config) {
   }
 }
 
-async function getCloudinaryFile(cloudinaryFolder, fileName) {
-  const image = await cloudinary.image(fileName);
-  console.log({ image });
-  return false;
+async function saveFileToCloudinary(base64, folder, fileName) {
+  const uploadStr = `data:image/jpeg;base64,${base64}`;
+  const config = {
+    public_id: `${folder}/${fileName}`,
+  };
+
+  cloudinary.uploader.upload(uploadStr, config, (err, res) => {
+    if (err) throw err;
+    console.log({ 'Cloudinary Image Payload': res });
+    return { url: res.secureUrl };
+  });
 }
 
 async function screenshotToCloudinary(config) {
-  // is it cached already?
-  //* get image from cloudinary
-  const maybeFile = await getCloudinaryFile(
-    config.cloudinaryFolder,
-    config.fileName
-  );
-  if (maybeFile) {
-    //* check date. if it's recent, return image url and out
-    console.log(`🗄️ Cache hit. Returning screenshot from cache`);
-    return proxyResponse({ url: maybeFile.url });
-  }
-  //* if it's old or no image, keep going
-  return console.log('hasta aquí, probando');
+  // not checking for cache 🙈
 
   try {
     // take the screenshot
     const image64 = await takeTheScreenshot(config);
-
     // save the screenshot
     console.log(`✍️ Writing file`);
-    //* upload to cluodinary
-    //* get url and return it
+    const saved = await saveFileToCloudinary(
+      image64,
+      config.cloudinaryFolder,
+      config.fileName
+    );
+    return proxyResponse({ url: saved.url });
   } catch (error) {
     return proxyError(error);
   } finally {
@@ -133,65 +131,3 @@ async function screenshotToCloudinary(config) {
 
 exports.screenshotToLocal = screenshotToLocal;
 exports.screenshotToCloudinary = screenshotToCloudinary;
-
-// class Screenshot {
-//   constructor(opts) {
-//     this.folder = opts.folder;
-//     this.fileName = opts.fileName;
-//     this.url = opts.url;
-//     this.width = opts.width;
-//     this.height = opts.height;
-//     this.fullPage = opts.fullPage;
-//   }
-
-//   async getFile() {}
-
-//   async putFile() {}
-// }
-
-// class CloudinaryScreenshot extends Screenshot {
-//   // constructor(opts) {
-//   //   super(opts);
-//   // }
-
-//   async getFile() {
-//     const image = await cloudinary.image(this.fileUrl);
-//     console.log(image);
-//     return false;
-//   }
-
-//   async putFile(base64) {
-//     const uploadStr = `data:image/jpeg;base64,${base64}`;
-//     cloudinary.uploader.upload(
-//       uploadStr,
-//       {
-//         public_id: `${this.folder}/${this.fileName}`,
-//       },
-//       (err, res) => {
-//         if (err) throw err;
-//         this.expires = undefined;
-//         console.log(res);
-//         return { url: res.secureUrl, expires: this.expires };
-//       }
-//     );
-//   }
-// }
-
-// /**
-//  * put / get a screenshot to the local filesystem
-//  */
-// class FSScreenshot extends Screenshot {}
-
-// module.exports = opts => {
-//   if (process.env.CLOUDINARY_URL) {
-//     return new CloudinaryScreenshot(opts);
-//   }
-//   // for local tests
-//   if (process.env.TEST_WITH_LOCAL_FS) {
-//     return new FSScreenshot(opts);
-//   }
-
-//   throw new Error(
-//     `A required environment variable is missing. Set S3_BUCKET or TEST_WITH_LOCAL_FS and try again.`
-//   );
-// };
