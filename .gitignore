@@ -4,7 +4,7 @@ node_modules/
 DOCS.md
 .vscode/
 
-lambda-dist/
+dist/
 lambda-package.zip
 
 screenshots/
