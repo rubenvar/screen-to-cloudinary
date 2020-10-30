@@ -1,22 +1,25 @@
-const thing = require(`../index`);
-const url = process.env.SITE_URL;
+const mainProcess = require(`../index`);
 
 const start = async () => {
-  const result = await thing.handler(
-    {
-      body: `{"url":"${url}"}`,
+  const event = {
+    body: JSON.stringify({
+      // config options
+      url: process.env.SITE_URL,
+    }),
+  };
+
+  const context = {
+    fail: err => {
+      console.log(`error:`);
+      console.log(err);
     },
-    {
-      fail: err => {
-        console.log(`error:`);
-        console.log(err);
-      },
-      succeed: res => {
-        console.log(`success!`);
-        console.log(res);
-      },
-    }
-  );
+    succeed: res => {
+      console.log(`success!`);
+      console.log(res);
+    },
+  };
+
+  const result = await mainProcess.handler(event, context);
 
   return result;
 };
