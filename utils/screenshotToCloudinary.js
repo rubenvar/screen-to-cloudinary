@@ -9,16 +9,15 @@ async function saveFileToCloudinary(base64, folder, fileName) {
     public_id: `${folder}/${fileName}`,
   };
 
-  cloudinary.uploader.upload(uploadStr, config, (err, res) => {
+  return cloudinary.uploader.upload(uploadStr, config, (err, res) => {
     if (err) throw err;
-    console.log({ 'Cloudinary Image Payload': res });
+    // console.log({ 'Cloudinary Image Payload': res });
     return { url: res.secureUrl };
   });
 }
 
 async function screenshotToCloudinary(config) {
-  // not checking for cache 🙈
-
+  // not checking for cache anymore 🙈
   try {
     // take the screenshot
     const image64 = await takeScreenshot(config);
@@ -34,11 +33,6 @@ async function screenshotToCloudinary(config) {
     console.log('error goes through here');
     return proxyError(error);
   }
-  // finally {
-  //   if (browser !== null) {
-  //     await browser.close();
-  //   }
-  // }
 }
 
 module.exports = screenshotToCloudinary;
