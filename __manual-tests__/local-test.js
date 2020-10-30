@@ -4,8 +4,7 @@ const start = async () => {
   const event = {
     body: JSON.stringify({
       // config options
-      url: 'https://www.le-vpn.com/es/',
-      // url: process.env.SITE_URL,
+      url: process.env.SITE_URL,
       cloudinaryFolder: 'vpnf/screenshots',
       fileName: 'F013',
     }),
