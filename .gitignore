@@ -2,8 +2,10 @@
 .env
 node_modules/
 DOCS.md
+.vscode/
 
 lambda-dist/
 lambda-package.zip
 
 screenshots/
+DEP*
