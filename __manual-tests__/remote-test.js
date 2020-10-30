@@ -2,19 +2,17 @@ require('dotenv').config();
 
 const axios = require(`axios`);
 
-const event = {
-  // body: {
-  // config options
+// config options
+const config = {
   url: process.env.SITE_URL,
   cloudinaryFolder: 'vpnf/screenshots',
-  fileName: 'F009',
-  // },
+  fileName: 'F007',
 };
 
 const start = async () => {
   let screenshotResponse;
   try {
-    screenshotResponse = await axios.post(process.env.LAMBDA_ENDPOINT, event);
+    screenshotResponse = await axios.post(process.env.LAMBDA_ENDPOINT, config);
     const { status, data } = screenshotResponse;
     console.log(status);
     console.log(data);
