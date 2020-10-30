@@ -13,12 +13,12 @@
   "dependencies": {
     "chrome-aws-lambda": "^5.3.1",
     "cloudinary": "^1.23.0",
+    "dotenv": "^8.2.0",
     "md5": "^2.3.0",
     "puppeteer-core": "5.3.1"
   },
   "devDependencies": {
     "axios": "^0.21.0",
-    "dotenv": "^8.2.0",
     "puppeteer": "^5.4.1"
   }
 }
