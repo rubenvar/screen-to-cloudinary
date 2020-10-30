@@ -10,5 +10,4 @@ Original idea comes from the [gatsby-transformer-screenshot](https://www.gatsbyj
 
 ## Features (goals)
 
-- [x] Pass some config for the size of image returned?
-- [ ] Add timestamp to ¿image title? and get it with regex to calculate cache expiration.
+- [x] Pass some config for the size of image returned
