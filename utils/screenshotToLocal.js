@@ -47,11 +47,6 @@ async function screenshotToLocal(config) {
   } catch (error) {
     return proxyError(error);
   }
-  //  finally {
-  //   if (browser !== null) {
-  //     await browser.close();
-  //   }
-  // }
 }
 
 module.exports = screenshotToLocal;
