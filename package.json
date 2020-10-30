@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build-lambda-package": "npm run prepare-lambda-package && cd dist && zip -rq ../lambda-package.zip . && cd .. && rm -rf dist",
-    "prepare-lambda-package": "rm -rf dist && mkdir dist && cp package.json dist/package.json && cp screenshot.js dist/screenshot.js && cp index.js dist/index.js && cd dist && npm install --production"
+    "prepare-lambda-package": "rm -rf dist && mkdir dist && cp package.json dist/package.json && cp -R utils dist/ && cp index.js dist/index.js && cd dist && npm install --production"
   },
   "dependencies": {
     "chrome-aws-lambda": "^5.3.1",
