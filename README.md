@@ -87,5 +87,6 @@ Test the function deployed at `<URL to Lambda endpoint>`:
 
 ## Future
 
-- [ ] Manage all test settings from the `__manual-tests__/config.js` file.
+- [ ] Check _cache_: check if a screenshot with the same `fileName` has been taken recently and return that one instead of taking a new one. It can be overwriten with a config setting.
+- [x] Manage all test settings from the `__manual-tests__/config.js` file.
 - [x] Pass some config for the size of image returned
