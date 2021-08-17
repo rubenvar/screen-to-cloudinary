@@ -9,6 +9,7 @@ exports.handler = async (event) => {
   let takeScreenshot;
   const request = event.body ? JSON.parse(event.body) : {};
 
+  // TODO check if valid url
   if (!request.url) {
     return proxyError(`no url provided to take screenshot of`);
   }
@@ -41,6 +42,6 @@ exports.handler = async (event) => {
 
   const screenshotResult = await takeScreenshot(config);
 
-  console.log(screenshotResult);
+  console.log(`response: ${JSON.stringify(screenshotResult)}`);
   return screenshotResult;
 };
