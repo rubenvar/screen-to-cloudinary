@@ -37,9 +37,9 @@ It can save screenshot to local fs, or to Cloudinary. Edit `.env` file to choose
 - Edit `__manual-tests__/config.js` with details about screenshot.
 - Execute:
 
-```bash
-node __manual-tests__/local-test.js
-```
+  ```bash
+  node __manual-tests__/local-test.js
+  ```
 
 ### Remote Test
 
@@ -50,16 +50,16 @@ Deploy fn to Lambda:
 - Run `npm run build-lambda-package`.
 - Upload the .zip into Lambda function (through S3, it's too big as it must include the whole `node_modules` folder 🤷‍♂️).
 - Setup all the API Gateway, etc.
-- Set CLOUDINARY_URL env variable **in Lambda**.
+- Set `CLOUDINARY_URL` env variable **in Lambda**.
 
 Test the function deployed at `<URL to Lambda endpoint>`:
 
-- Set LAMBDA_ENDPOINT ad SITE_URL env variables **locally**.
+- Set `LAMBDA_ENDPOINT` and `SITE_URL` env variables **locally**.
 - Execute:
 
-```bash
-node __manual-tests__/remote-test.js
-```
+  ```bash
+  node __manual-tests__/remote-test.js
+  ```
 
 ## Future
 
