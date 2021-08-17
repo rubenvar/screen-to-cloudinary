@@ -1,11 +1,10 @@
 .DS_Store
 .env
 node_modules/
-DOCS.md
 .vscode/
 
 dist/
 lambda-package.zip
-
+lambda-package/
 screenshots/
 DEP*
