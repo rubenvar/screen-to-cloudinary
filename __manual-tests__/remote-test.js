@@ -1,7 +1,6 @@
 require('dotenv').config();
-
 // eslint-disable-next-line import/no-extraneous-dependencies
-const axios = require('axios'); // axios is nly used in dev, for testing locally
+const axios = require('axios'); // axios is only used in dev for testing locally
 const { config } = require('./config');
 
 const start = async () => {
