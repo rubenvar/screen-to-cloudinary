@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 const cloudinary = require('cloudinary').v2;
-
 const takeScreenshot = require('./takeScreenshot');
 const { proxyResponse, proxyError } = require('./proxy');
 
@@ -9,7 +8,6 @@ async function saveFileToCloudinary(base64, public_id, cloudinaryUrl) {
   const [_, api_key, api_secret, cloud_name] = cloudinaryUrl.match(
     /cloudinary:\/\/(\d+):(.+)@(.+)/
   );
-
   const uploadStr = `data:image/jpeg;base64,${base64}`;
   const config = {
     public_id,
@@ -25,7 +23,7 @@ async function saveFileToCloudinary(base64, public_id, cloudinaryUrl) {
 }
 
 async function screenshotToCloudinary(config) {
-  // not checking for cache anymore 🙈
+  // TODO check for cache maybe
   try {
     // take the screenshot
     const image64 = await takeScreenshot(config);

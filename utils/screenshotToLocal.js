@@ -21,6 +21,7 @@ async function saveFileToLocal(base64, fileUrl) {
     await fsPromises.writeFile(fileUrl, base64, { encoding: 'base64' });
     return { url: fileUrl };
   } catch (error) {
+    console.log('there was some error when writing file');
     throw error;
   }
 }
@@ -30,7 +31,7 @@ async function screenshotToLocal(config) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   const fileUrl = path.join(dir, config.fileName);
 
-  // is it cached already?
+  // is it cached (file with same name)?
   const maybeFile = await getLocalFile(fileUrl);
   if (maybeFile) {
     console.log(`🗄️ Cache hit. Returning screenshot from cache`);
@@ -43,6 +44,7 @@ async function screenshotToLocal(config) {
     // save the screenshot
     console.log(`✍️ Writing file`);
     const saved = await saveFileToLocal(image64, fileUrl);
+    // return the info
     return proxyResponse({ url: saved.url });
   } catch (error) {
     return proxyError(error);
