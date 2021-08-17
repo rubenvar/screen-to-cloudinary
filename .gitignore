@@ -5,6 +5,6 @@ node_modules/
 
 dist/
 lambda-package.zip
-lambda-package/
+lambda-package*
 screenshots/
 DEP*
