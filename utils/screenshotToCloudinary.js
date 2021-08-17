@@ -1,17 +1,25 @@
+/* eslint-disable camelcase */
 const cloudinary = require('cloudinary').v2;
 
 const takeScreenshot = require('./takeScreenshot');
 const { proxyResponse, proxyError } = require('./proxy');
 
-async function saveFileToCloudinary(base64, folder, fileName) {
+async function saveFileToCloudinary(base64, public_id, cloudinaryUrl) {
+  // eslint-disable-next-line no-unused-vars
+  const [_, api_key, api_secret, cloud_name] = cloudinaryUrl.match(
+    /cloudinary:\/\/(\d+):(.+)@(.+)/
+  );
+
   const uploadStr = `data:image/jpeg;base64,${base64}`;
   const config = {
-    public_id: `${folder}/${fileName}`,
+    public_id,
+    api_key,
+    api_secret,
+    cloud_name,
   };
 
   return cloudinary.uploader.upload(uploadStr, config, (err, res) => {
     if (err) throw err;
-    // console.log({ 'Cloudinary Image Payload': res });
     return { url: res.secureUrl };
   });
 }
@@ -25,12 +33,13 @@ async function screenshotToCloudinary(config) {
     console.log(`✍️ Writing file`);
     const saved = await saveFileToCloudinary(
       image64,
-      config.cloudinaryFolder,
-      config.fileName
+      `${config.cloudinaryFolder}/${config.fileName}`,
+      config.cloudinaryUrl
     );
+    // return the info
     return proxyResponse({ url: saved.url });
   } catch (error) {
-    console.log('error goes through here');
+    console.log('error on saving goes through proxy here');
     return proxyError(error);
   }
 }

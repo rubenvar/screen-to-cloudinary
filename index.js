@@ -1,44 +1,43 @@
 require('dotenv').config();
-const { proxyResponse, proxyError } = require('./utils/proxy');
+const { proxyError } = require('./utils/proxy');
 const screenshotToLocal = require('./utils/screenshotToLocal');
 const screenshotToCloudinary = require('./utils/screenshotToCloudinary');
+const packageJson = require('./package.json');
 
 // exports.handler = async (event, context) => {
 exports.handler = async (event) => {
   let takeScreenshot;
-
   const request = event.body ? JSON.parse(event.body) : {};
 
   if (!request.url) {
-    return proxyError(`no url provided`);
+    return proxyError(`no url provided to take screenshot of`);
   }
 
-  // TODO allow to pass a cloudinary account url as param to make it fully configurable
-  const config = {
-    cloudinaryFolder: request.cloudinaryFolder || 'default',
-    fileName: `${request.fileName || `default-${Date.now()}`}${
-      process.env.CLOUDINARY_URL ? '' : '.jpg'
-    }`,
-    url: request.url,
-    width: request.width || 1024,
-    height: request.height || 768,
-    fullPage: request.fullPage || false,
-  };
-
-  // check if it's just a local test, or if there is a correct Cloudinary URL
-  if (process.env.CLOUDINARY_URL) {
+  // check if there is a correct Cloudinary URL, or it's just a local test
+  if (request.cloudinaryUrl) {
     takeScreenshot = screenshotToCloudinary;
   } else if (process.env.TEST_WITH_LOCAL_FS) {
     takeScreenshot = screenshotToLocal;
   } else {
     throw new Error(
-      `A required environment variable is missing. Set CLOUDINARY_URL or TEST_WITH_LOCAL_FS and try again.`
+      `A valid Cloudinary URL is missing. Either pass it in the config, or set the TEST_WITH_LOCAL_FS environment variable to test it, and try again.`
     );
   }
 
+  const config = {
+    url: request.url,
+    cloudinaryUrl: request.cloudinaryUrl,
+    cloudinaryFolder: request.cloudinaryFolder || 'default',
+    fileName: `${request.fileName || `default-${Date.now()}`}${
+      request.cloudinaryUrl ? '' : '.jpg'
+    }`,
+    width: request.width || 1024,
+    height: request.height || 768,
+    fullPage: request.fullPage || false,
+  };
+
   // start
-  console.log(`Invoked: ${config.url}`);
-  console.log(config);
+  console.log(`Invoked (v${packageJson.version}): ${config.url}`);
 
   const screenshotResult = await takeScreenshot(config);
 
