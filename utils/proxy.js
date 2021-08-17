@@ -1,4 +1,4 @@
-const proxyResponse = body => {
+const proxyResponse = (body) => {
   body.success = true;
 
   return {
@@ -7,7 +7,7 @@ const proxyResponse = body => {
   };
 };
 
-const proxyError = err => {
+const proxyError = (err) => {
   let msg = err;
 
   if (err instanceof Error) {

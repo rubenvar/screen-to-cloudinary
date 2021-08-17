@@ -1,5 +1,5 @@
-const mainProcess = require(`../index`);
-const { config } = require("./config");
+const mainProcess = require('../index');
+const { config } = require('./config');
 
 const start = async () => {
   const event = {

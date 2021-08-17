@@ -5,5 +5,5 @@ exports.config = {
   cloudinaryFolder: 'vpnf/screenshots',
   // hardcoded variable file name
   // TODO: allow to choose filename prefix, and auto-add timestamp to avoid duplicates
-  fileName: `screenshot-${Date.now()}`, 
+  fileName: `screenshot-${Date.now()}`,
 };
