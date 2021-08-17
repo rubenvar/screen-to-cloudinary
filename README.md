@@ -10,10 +10,6 @@ It takes a screenshot of a given URL, posts the image to a Cloudinary account, a
 
 Original idea comes from the [gatsby-transformer-screenshot](https://www.gatsbyjs.com/plugins/gatsby-transformer-screenshot/) plugin for Gatsby.
 
-## Features
-
-🚧 TODO
-
 ## How to use
 
 First deploy the function to Lambda:
