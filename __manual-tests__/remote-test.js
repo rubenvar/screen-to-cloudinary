@@ -1,13 +1,6 @@
 require('dotenv').config();
-
 const axios = require(`axios`);
-
-// config options
-const config = {
-  url: process.env.SITE_URL,
-  cloudinaryFolder: 'vpnf/screenshots',
-  fileName: 'F007',
-};
+const { config } = require('./config');
 
 const start = async () => {
   let screenshotResponse;
@@ -25,9 +18,3 @@ const start = async () => {
 };
 
 start();
-
-// {
-//   "url": "https://hide.me/es/",
-//   "cloudinaryFolder": "vpnf/screenshots",
-//   "fileName": "F009"
-// }
