@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen to Cloudinary UI</title>
+    <style>
+      body {
+        width: 100%;
+        min-height: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      }
+      form {
+        background: palevioletred;
+        width: 576px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+      }
+      label {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+      }
+      input {
+        font-family: inherit;
+        font-size: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST">
+      <label for="lambdaEndpoint">
+        <span>lambdaEndpoint*</span>
+        <input
+          value="https://vgi7w4s9d1.execute-api.eu-west-1.amazonaws.com/dev/"
+          type="text"
+          name="lambdaEndpoint"
+          id="lambdaEndpoint"
+          placeholder="lambdaEndpoint"
+          required
+        />
+      </label>
+      <label for="url">
+        <span>url*</span>
+        <input
+          value="https://calendarioaguasabiertas.com/ligas"
+          type="text"
+          name="url"
+          id="url"
+          placeholder="url"
+          required
+        />
+      </label>
+      <label for="cloudinaryUrl">
+        <span>cloudinaryUrl*</span>
+        <input
+          value="cloudinary://536862873359274:f_sltJlbYz76eMNoVAEM8rw-qSk@rub54381"
+          type="text"
+          name="cloudinaryUrl"
+          id="cloudinaryUrl"
+          placeholder="cloudinaryUrl"
+          required
+        />
+      </label>
+      <label for="cloudinaryFolder">
+        <span>cloudinaryFolder</span>
+        <input
+          type="text"
+          name="cloudinaryFolder"
+          id="cloudinaryFolder"
+          placeholder="cloudinaryFolder"
+          value="test-screenshots"
+        />
+      </label>
+      <label for="fileName">
+        <span>fileName</span>
+        <input
+          type="text"
+          name="fileName"
+          id="fileName"
+          placeholder="fileName"
+        />
+      </label>
+      <label for="width">
+        <span>width</span>
+        <input type="number" name="width" id="width" placeholder="width" />
+      </label>
+      <label for="height">
+        <span>height</span>
+        <input type="number" name="height" id="height" placeholder="height" />
+      </label>
+      <!-- 
+        must be a checkbox!!
+        <label for="fullPage">
+        <span>fullPage</span>
+        <input
+          type="text"
+          name="fullPage"
+          id="fullPage"
+          placeholder="fullPage"
+        />
+      </label> -->
+      <button type="submit">Take screenshot</button>
+    </form>
+    <div id="display-result"></div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
