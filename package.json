@@ -8,7 +8,9 @@
   },
   "scripts": {
     "build-lambda-package": "npm run prepare-lambda-package && cd dist && zip -rq ../lambda-package.zip . && cd .. && rm -rf dist",
-    "prepare-lambda-package": "rm -rf dist && mkdir dist && cp package.json dist/package.json && cp -R utils dist/ && cp index.js dist/index.js && cd dist && npm install --production"
+    "prepare-lambda-package": "rm -rf dist && mkdir dist && cp package.json dist/package.json && cp -R utils dist/ && cp index.js dist/index.js && cd dist && npm install --production",
+    "dev": "parcel serve frontend/index.html --open --cache-dir frontend/.parcel-cache --dist-dir frontend/dist",
+    "build:frontend": "parcel build frontend/index.html --cache-dir frontend/.parcel-cache --dist-dir frontend/build --no-source-maps"
   },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
@@ -17,10 +19,12 @@
     "puppeteer-core": "10.2.0"
   },
   "devDependencies": {
+    "@parcel/transformer-stylus": "^2.0.0-rc.0",
     "axios": "^0.21.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-wesbos": "^1.0.1",
+    "parcel": "^2.0.0-rc.0",
     "prettier": "2.3.2",
     "puppeteer": "^10.2.0"
   },
