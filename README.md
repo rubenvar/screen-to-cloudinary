@@ -14,6 +14,35 @@ Original idea comes from the [gatsby-transformer-screenshot](https://www.gatsbyj
 
 🚧 TODO
 
+## How to use
+
+First deploy the function to Lambda:
+
+1. Run `npm run build-lambda-package`.
+2. Upload the .zip into Lambda function (through S3, it's too big becuse it has the `node_modules` folder 🤷‍♂️).
+3. Setup all the API Gateway, etc. in AWS.
+
+Send a POST request to the endpoint with a config object in the body. Config options:
+
+| key | required | type | default | details |
+|-----|----------|------|---------|---------|
+| url | yes | string | - | url to take screenshot of. If not provided, throws error |
+| cloudinaryUrl | yes | string | - | Full Cloudinary url (with api_key, api_secret and cloud_name). If not provided and not a test (read below), throws error  |
+| cloudinaryFolder | no | string | 'default' | Folder to save the screenshot to |
+| fileName | no | string | 'default-[timestamp].jpg' | Filename |
+| width | no | number | 1024 | Screenshot width |
+| height | no | number | 768 | Screenshot height |
+| fullPage | no | boolean | false | Wether to take a screenshot of the whole page or just the _above the fold_ |
+
+If everything works the response will be an object with the status and the screenshot url.
+
+```bash
+{
+  url: 'http://res.cloudinary.com/.../example.png',
+  success: true
+}
+```
+
 ## How to test it
 
 3 tests can be done:
@@ -47,10 +76,9 @@ Need to deploy it first. After, tests it making a POST request to the AWS endpoi
 
 Deploy fn to Lambda:
 
-- Run `npm run build-lambda-package`.
-- Upload the .zip into Lambda function (through S3, it's too big as it must include the whole `node_modules` folder 🤷‍♂️).
-- Setup all the API Gateway, etc.
-- Set `CLOUDINARY_URL` env variable **in Lambda**.
+1. Run `npm run build-lambda-package`.
+2. Upload the .zip into Lambda function (through S3, it's too big becuse it has the `node_modules` folder 🤷‍♂️).
+3. Setup all the API Gateway, etc. in AWS.
 
 Test the function deployed at `<URL to Lambda endpoint>`:
 
