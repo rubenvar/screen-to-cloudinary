@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-08-18
+
+### Removed
+
+- Abstracted the UI into [it's own repo](https://github.com/rubenvar/screen-to-cloudinary-ui).
+
 ## [1.1.0] - 2021-08-18
 
 ### Added
