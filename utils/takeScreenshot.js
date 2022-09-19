@@ -1,4 +1,4 @@
-const chromium = require(`chrome-aws-lambda`);
+const chromium = require(`@sparticuz/chrome-aws-lambda`);
 
 // main common function to take the screenshot
 async function takeScreenshot(config) {

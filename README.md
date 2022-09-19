@@ -10,13 +10,20 @@ It takes a screenshot of a given URL, posts the image to a Cloudinary account, a
 
 Original idea comes from the [gatsby-transformer-screenshot](https://www.gatsbyjs.com/plugins/gatsby-transformer-screenshot/) plugin for Gatsby.
 
+### Note
+
+This function uses `@sparticuz/chrome-aws-lambda`. This dependency (and `puppeteeer-core`) are not included in the `package.json` `dependencies` list, as the function is packaged without them.
+
+That dependency is later added as a Layer on AWS, so it's required in the `takeScreenshot` function even if not installed in `node_modules`.
+
 ## How to use
 
 First deploy the function to Lambda:
 
 1. Run `npm run build-lambda-package`.
 2. Upload the .zip into Lambda function (through S3, it's too big becuse it has the `node_modules` folder 🤷‍♂️).
-3. Setup all the API Gateway, etc. in AWS.
+3. [Setup a Layer in AWS function](https://github.com/shelfio/chrome-aws-lambda-layer).
+4. Setup all the API Gateway, etc. in AWS.
 
 Send a POST request to the endpoint with a config object in the body. Config options:
 
@@ -51,6 +58,7 @@ If everything works the response will be an object with the status and the scree
 
 Takes a screenshot with pupeteer and can save it either to Cloudinary or to filesystem.
 
+- Edit `package.json` and add `@sparticuz/chrome-aws-lambda` and `puppeteer-core` in dependencies.
 - `npm install` first.
   - `puppeteer` needs to be installed as devDep for the function to work locally.
 
