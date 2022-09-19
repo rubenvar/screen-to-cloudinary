@@ -28,7 +28,7 @@ Send a POST request to the endpoint with a config object in the body. Config opt
 | fileName | no | string | 'default-[timestamp].jpg' | Filename |
 | width | no | number | 1024 | Screenshot width |
 | height | no | number | 768 | Screenshot height |
-| fullPage | no | boolean | false | Wether to take a screenshot of the whole page or just the _above the fold_ |
+| fullPage | no | boolean | false | Wether to take a screenshot of the whole page or just the *above the fold* |
 
 If everything works the response will be an object with the status and the screenshot url.
 
@@ -87,6 +87,6 @@ Test the function deployed at `<URL to Lambda endpoint>`:
 
 ## Future
 
-- [ ] Check _cache_: check if a screenshot with the same `fileName` has been taken recently and return that one instead of taking a new one. It can be overwriten with a config setting.
+- [ ] Check *cache*: check if a screenshot with the same `fileName` has been taken recently and return that one instead of taking a new one. It can be overwriten with a config setting.
 - [x] Manage all test settings from the `__manual-tests__/config.js` file.
 - [x] Pass some config for the size of image returned
