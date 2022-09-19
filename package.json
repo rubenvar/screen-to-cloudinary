@@ -1,6 +1,6 @@
 {
   "name": "screen-to-cloudinary",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "A lambda function that takes a screenshot of a URL and uploads it to Cloudinary",
   "engines": {
